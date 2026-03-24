@@ -1474,3 +1474,119 @@ canvas#particle-wave {
   .arch-step { border-right: none; border-bottom: 1.5px solid var(--black); }
   .arch-step:last-child { border-bottom: none; }
 }
+
+/* ── CONTACT MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-box {
+  background: var(--black);
+  border: 1.5px solid var(--yellow);
+  max-width: 580px;
+  width: 100%;
+  padding: 3rem;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--yellow);
+  font-size: 1.75rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+.modal-close:hover { opacity: 0.6; }
+.modal-title {
+  font-family: var(--display);
+  font-size: 2.5rem;
+  color: var(--yellow);
+  letter-spacing: 0.03em;
+  margin-bottom: 0.5rem;
+}
+.modal-subtitle {
+  font-family: var(--body);
+  font-size: 0.875rem;
+  color: #999;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+.modal-form .form-group {
+  margin-bottom: 1.25rem;
+}
+.modal-form label {
+  display: block;
+  font-family: var(--condensed);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+.modal-form input,
+.modal-form textarea {
+  width: 100%;
+  background: transparent;
+  border: 1.5px solid #333;
+  padding: 0.875rem 1rem;
+  font-family: var(--body);
+  font-size: 0.9rem;
+  color: #fff;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.modal-form input::placeholder,
+.modal-form textarea::placeholder {
+  color: #555;
+}
+.modal-form input:focus,
+.modal-form textarea:focus {
+  border-color: var(--yellow);
+}
+.modal-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.modal-submit {
+  width: 100%;
+  padding: 1rem;
+  background: var(--yellow);
+  color: var(--black);
+  border: none;
+  font-family: var(--condensed);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: opacity 0.2s;
+}
+.modal-submit:hover { opacity: 0.85; }
+.modal-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.modal-status {
+  font-family: var(--body);
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  text-align: center;
+  min-height: 1.2em;
+}
+.modal-status.success { color: var(--yellow); }
+.modal-status.error { color: #f44; }
