@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: 'Growth Mode <onboarding@resend.dev>',
-        to: 'baz@growthmode.agency',
+        to: 'baz@growwithghost.io',
         subject: `New enquiry from ${name}${company ? ` (${company})` : ''}`,
         html: `
           <h2>New Project Enquiry</h2>
