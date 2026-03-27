@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <title>Contact | Growth Mode — AI Product Studio</title>
+  <meta name="description" content="Start a project with Growth Mode. We build AI-powered products, automate workflows, and engineer growth systems for B2B companies across martech, adtech and fintech.">
+  <link rel="canonical" href="https://www.growthmode.agency/contact">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Contact | Growth Mode — AI Product Studio">
+  <meta property="og:description" content="Start a project with Growth Mode. We build AI-powered products, automate workflows, and engineer growth systems for B2B companies.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.growthmode.agency/contact">
+  <meta property="og:image" content="https://www.growthmode.agency/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Growth Mode">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact | Growth Mode — AI Product Studio">
+  <meta name="twitter:description" content="Start a project with Growth Mode. We build AI-powered products, automate workflows, and engineer growth systems for B2B companies.">
+  <meta name="twitter:image" content="https://www.growthmode.agency/og-image.jpg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem var(--side-pad) 6rem;
+    }
+
+    .contact-form-col h2,
+    .contact-info-col h2 {
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Form */
+    .contact-form .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .contact-form label {
+      font-family: var(--condensed);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--black);
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      background: transparent;
+      border: 1.5px solid var(--black);
+      padding: 0.75rem 1rem;
+      font-family: var(--body);
+      font-size: 0.95rem;
+      color: var(--black);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus {
+      border-color: var(--accent, #f5f500);
+      box-shadow: 0 0 0 2px rgba(245,245,0,0.2);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .contact-form select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230F0F0F' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    .contact-form select option {
+      background: #fff;
+      color: var(--black);
+    }
+
+    .contact-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--black);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      font-family: var(--condensed);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .contact-submit:hover {
+      background: var(--yellow, #f5f500);
+      color: var(--black);
+    }
+
+    .contact-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .form-status {
+      margin-top: 1rem;
+      font-family: var(--body);
+      font-size: 0.9rem;
+      min-height: 1.4em;
+    }
+
+    .form-status.success { color: #1a7a1a; }
+    .form-status.error   { color: #c0392b; }
+
+    /* Info column */
+    .contact-detail {
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-detail-label {
+      font-family: var(--condensed);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-detail-value {
+      font-family: var(--body);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .contact-detail-value a {
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--black);
+      transition: border-color 0.2s;
+    }
+
+    .contact-detail-value a:hover {
+      border-color: transparent;
+    }
+
+    .contact-promise {
+      background: #f5f5f5;
+      border-left: 3px solid var(--black);
+      padding: 1.2rem 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .contact-promise p {
+      font-family: var(--body);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .contact-promise strong {
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 2rem var(--side-pad) 4rem;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Growth Mode",
+    "url": "https://www.growthmode.agency/contact",
+    "description": "Get in touch with Growth Mode to start a project.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Growth Mode",
+      "url": "https://www.growthmode.agency",
+      "email": "hello@growthmode.agency",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "Oxfordshire",
+        "addressCountry": "GB"
+      }
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Ticker Bar -->
+  <div class="ticker-bar" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot"></span>Startups</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>SaaS</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Agencies</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Martech</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Adtech</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Fintech</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Automation</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Growth</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>GTM</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>AI Product</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Scale</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Startups</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>SaaS</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Agencies</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Martech</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Adtech</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Fintech</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Automation</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Growth</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>GTM</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>AI Product</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Scale</span>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <header>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/" class="nav-logo">GROWTH MODE</a>
+
+      <ul class="nav-links">
+        <li><a href="/services">Services</a></li>
+        <li><a href="/#verticals">Verticals</a></li>
+        <li><a href="/case-studies">Case Studies</a></li>
+        <li><a href="/research">Research</a></li>
+        <li><a href="/#process">Process</a></li>
+        <li><a href="/contact" aria-current="page">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <svg width="36" height="26" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="18" cy="13" rx="17" ry="12" stroke="#0F0F0F" stroke-width="1.5"/>
+          <circle cx="18" cy="13" r="6" stroke="#0F0F0F" stroke-width="1.5"/>
+          <line x1="18" y1="7" x2="18" y2="1" stroke="#0F0F0F" stroke-width="1.5"/>
+          <line x1="18" y1="25" x2="18" y2="19" stroke="#0F0F0F" stroke-width="1.5"/>
+          <line x1="12" y1="13" x2="1" y2="13" stroke="#0F0F0F" stroke-width="1.5"/>
+          <line x1="35" y1="13" x2="24" y2="13" stroke="#0F0F0F" stroke-width="1.5"/>
+          <circle cx="18" cy="13" r="2.5" fill="#0F0F0F"/>
+        </svg>
+        <a href="/contact" class="nav-cta">Start a Project &#8599;</a>
+      </div>
+
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <a href="/" class="page-back">&larr; Back to Home</a>
+      <h1 class="page-title">START A PROJECT</h1>
+      <p class="page-subtitle">Tell us what you're building. We'll tell you how we can help.</p>
+    </section>
+
+    <!-- Contact Layout -->
+    <div class="contact-layout">
+
+      <!-- Form -->
+      <div class="contact-form-col reveal">
+        <h2>GET IN TOUCH</h2>
+        <form class="contact-form" id="contact-page-form" novalidate>
+          <div class="form-group">
+            <label for="cp-name">NAME *</label>
+            <input type="text" id="cp-name" name="name" placeholder="Your name" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="cp-email">EMAIL *</label>
+            <input type="email" id="cp-email" name="email" placeholder="you@company.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="cp-company">COMPANY</label>
+            <input type="text" id="cp-company" name="company" placeholder="Company name (optional)" autocomplete="organization">
+          </div>
+          <div class="form-group">
+            <label for="cp-service">WHAT ARE YOU LOOKING FOR?</label>
+            <select id="cp-service" name="service">
+              <option value="" disabled selected>Select a service</option>
+              <option value="AI Product Development">AI Product Development</option>
+              <option value="AI SEO">AI SEO</option>
+              <option value="AI Automation &amp; Training">AI Automation &amp; Training</option>
+              <option value="Fractional AI Consultancy">Fractional AI Consultancy</option>
+              <option value="Not sure yet">Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cp-message">PROJECT BRIEF *</label>
+            <textarea id="cp-message" name="message" placeholder="Tell us about your project, goals, and timeline..." required></textarea>
+          </div>
+          <button type="submit" class="contact-submit" id="cp-submit">SEND MESSAGE &#8599;</button>
+          <p class="form-status" id="cp-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <!-- Info -->
+      <div class="contact-info-col reveal d2">
+        <h2>CONTACT DETAILS</h2>
+
+        <div class="contact-detail">
+          <p class="contact-detail-label">Email</p>
+          <p class="contact-detail-value">
+            <a href="mailto:hello@growthmode.agency">hello@growthmode.agency</a>
+          </p>
+        </div>
+
+        <div class="contact-detail">
+          <p class="contact-detail-label">LinkedIn</p>
+          <p class="contact-detail-value">
+            <a href="https://www.linkedin.com/in/bazfurby/" target="_blank" rel="noopener noreferrer">Baz Furby &#8599;</a>
+          </p>
+        </div>
+
+        <div class="contact-detail">
+          <p class="contact-detail-label">Location</p>
+          <p class="contact-detail-value">Based in Oxfordshire, UK.<br>Working across the UK and internationally.</p>
+        </div>
+
+        <div class="contact-promise">
+          <p><strong>We reply within 24 hours.</strong> Every enquiry gets a personal response from Baz — not a sales team or automated workflow.</p>
+        </div>
+
+        <div class="contact-detail" style="margin-top: 2.5rem;">
+          <p class="contact-detail-label">Our services</p>
+          <p class="contact-detail-value">
+            <a href="/services/saas-ai-development">SaaS &amp; AI Development</a><br>
+            <a href="/services/ai-seo">AI SEO</a><br>
+            <a href="/services/ai-automation-training">AI Automation &amp; Training</a><br>
+            <a href="/services/fractional-ai-consultancy">Fractional AI Consultancy</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-col footer-logo-col">
+        <a href="/" class="footer-logo">GROWTH<br>MODE</a>
+        <p class="footer-tagline">AI Product Studio</p>
+        <p class="footer-location">Based in Oxfordshire. Working across the UK and internationally.</p>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col-title">Services</h4>
+        <ul class="footer-links">
+          <li><a href="/services/saas-ai-development">SaaS AI Development</a></li>
+          <li><a href="/services/ai-seo">AI SEO</a></li>
+          <li><a href="/services/ai-automation-training">AI Automation Training</a></li>
+          <li><a href="/services/fractional-ai-consultancy">Fractional AI Consultancy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col-title">Verticals</h4>
+        <ul class="footer-links">
+          <li><a href="/#verticals">Martech</a></li>
+          <li><a href="/#verticals">Adtech</a></li>
+          <li><a href="/#verticals">Fintech</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col-title">Contact</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:hello@growthmode.agency">hello@growthmode.agency</a></li>
+          <li><a href="https://www.linkedin.com/in/bazfurby/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="/research">Research</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Growth Mode. All rights reserved. &nbsp;&middot;&nbsp; <a href="/privacy-policy" style="color:inherit;text-decoration:none;border-bottom:1px solid currentColor;">Privacy Policy</a></p>
+      <svg width="36" height="26" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <ellipse cx="18" cy="13" rx="17" ry="12" stroke="#0F0F0F" stroke-width="1.5"/>
+        <circle cx="18" cy="13" r="6" stroke="#0F0F0F" stroke-width="1.5"/>
+        <line x1="18" y1="7" x2="18" y2="1" stroke="#0F0F0F" stroke-width="1.5"/>
+        <line x1="18" y1="25" x2="18" y2="19" stroke="#0F0F0F" stroke-width="1.5"/>
+        <line x1="12" y1="13" x2="1" y2="13" stroke="#0F0F0F" stroke-width="1.5"/>
+        <line x1="35" y1="13" x2="24" y2="13" stroke="#0F0F0F" stroke-width="1.5"/>
+        <circle cx="18" cy="13" r="2.5" fill="#0F0F0F"/>
+      </svg>
+    </div>
+  </footer>
+
+  <script>
+    /* Scroll Reveal */
+    (function () {
+      const reveals = document.querySelectorAll('.reveal');
+      if (!reveals.length) return;
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(function (el) { observer.observe(el); });
+    })();
+
+    /* Mobile Nav */
+    (function () {
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('.site-nav');
+      if (!toggle || !nav) return;
+      toggle.addEventListener('click', function () {
+        const isOpen = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen);
+      });
+    })();
+
+    /* Contact Form */
+    (function () {
+      var form = document.getElementById('contact-page-form');
+      var submit = document.getElementById('cp-submit');
+      var status = document.getElementById('cp-status');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        submit.disabled = true;
+        submit.textContent = 'SENDING...';
+        status.textContent = '';
+        status.className = 'form-status';
+
+        var data = {
+          name: form.name.value,
+          email: form.email.value,
+          company: form.company.value,
+          message: (form.service.value ? '[' + form.service.value + ']\n\n' : '') + form.message.value
+        };
+
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(function (res) { return res.json().then(function (d) { return { ok: res.ok, data: d }; }); })
+        .then(function (result) {
+          if (result.ok) {
+            status.textContent = "Message sent. We'll be in touch within 24 hours.";
+            status.className = 'form-status success';
+            form.reset();
+          } else {
+            status.textContent = result.data.error || 'Something went wrong. Please try again.';
+            status.className = 'form-status error';
+          }
+        })
+        .catch(function () {
+          status.textContent = 'Network error. Please try again.';
+          status.className = 'form-status error';
+        })
+        .finally(function () {
+          submit.disabled = false;
+          submit.textContent = 'SEND MESSAGE \u2197';
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
