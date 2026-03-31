@@ -1027,8 +1027,17 @@ canvas#particle-wave {
   font-size: 0.7rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--black);
-  opacity: 0.3;
+  color: rgba(15,15,15,0.3);
+  overflow: hidden;
+  padding: 0;
+}
+.case-study-image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  opacity: 1;
 }
 .case-study-stats {
   display: grid;
