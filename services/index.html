@@ -34,13 +34,10 @@
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.growthmode.agency/services#service",
     "name": "Growth Mode Services",
-    "description": "Four ways Growth Mode works with B2B companies. From full AI product builds to embedded consultancy.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Growth Mode",
-      "url": "https://www.growthmode.agency"
-    },
+    "description": "AI product studio services for B2B companies: SaaS & AI development, AI SEO, AI automation & training, and fractional AI consultancy.",
+    "provider": {"@id": "https://www.growthmode.agency/#organization"},
     "url": "https://www.growthmode.agency/services"
   }
   </script>
@@ -72,10 +69,10 @@
       <a href="/case-studies">Case Studies</a>
       <a href="/research">Research</a>
       <a href="/#process">Process</a>
-      <a href="/#contact">Contact</a>
+      <a href="/contact">Contact</a>
     </div>
     <div class="nav-right">
-      <a href="/#contact" class="nav-cta">Start a Project <span class="arrow">↗</span></a>
+      <a href="/contact" class="nav-cta">Start a Project <span class="arrow">↗</span></a>
       <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
@@ -99,25 +96,49 @@
   <section class="service-detail-grid reveal d3">
     <a href="/services/saas-ai-development" class="service-detail-card">
       <h3>SaaS & AI Development</h3>
-      <p>End-to-end design, development and deployment of AI-native products — from concept to market-ready SaaS.</p>
+      <p>End-to-end design, development and deployment of AI-native products — from concept to market-ready SaaS. We handle the full product lifecycle: architecture, design, build, deployment, and GTM. We don't hand off, we ship.</p>
       <span class="card-cta">Learn More ↗</span>
     </a>
     <a href="/services/ai-seo" class="service-detail-card">
-      <h3>AI SEO</h3>
-      <p>AI-first SEO strategies optimised for how search actually works today — and automated to compound over time.</p>
+      <h3>AI SEO Services</h3>
+      <p>AI-first SEO strategies optimised for how search actually works today — structured data entity graphs, server-side rendering, AI crawler accessibility, and always-on automated optimisation that compounds without constant human input.</p>
       <span class="card-cta">Learn More ↗</span>
     </a>
     <a href="/services/ai-automation-training" class="service-detail-card">
       <h3>AI Automation & Training</h3>
-      <p>Audit where AI creates the most leverage, build the automation to capture it, and train your team to run it.</p>
+      <p>Audit where AI creates the most leverage, build the automation to capture it, and train your team to run it. From outreach and lead scoring to content production and ops — revenue-driving automations that replace repetitive work and surface insight in real time.</p>
       <span class="card-cta">Learn More ↗</span>
     </a>
     <a href="/services/fractional-ai-consultancy" class="service-detail-card">
       <h3>Fractional AI Consultancy</h3>
-      <p>Senior AI expertise embedded in your business — identifying leverage, building processes, and training teams.</p>
+      <p>Senior AI expertise embedded in your business without the full-time hire. Baz Furby works directly with a small number of founders and leadership teams — identifying leverage, building processes, and training teams to run them.</p>
       <span class="card-cta">Learn More ↗</span>
     </a>
   </section>
+
+  <!-- How We Work -->
+  <section class="about-section reveal" style="padding: 4rem 2rem; max-width: 900px; margin: 0 auto;">
+    <h2>HOW GROWTH MODE WORKS</h2>
+    <p>Every engagement starts with discovery. We audit your current stack, map your workflows, and score each part of your business against AI leverage potential. The output is a prioritised plan — not a list of tools to evaluate, but a concrete sequence of interventions with expected outcomes.</p>
+    <p>From there, we move into build. Whether that is a full AI product, an automation system, a content engine, or an embedded consultancy arrangement, the work is hands-on and founder-led. Baz is involved throughout — not managing delivery from a distance, but doing the work alongside your team.</p>
+    <p>We work with B2B companies across martech, adtech, and fintech, primarily in the UK but also internationally. Engagements are intentionally limited in number so each one gets the depth of attention it needs. If you are thinking about an AI initiative and want to understand whether Growth Mode is the right fit, <a href="/contact" style="color:inherit;border-bottom:1px solid currentColor;">start a conversation</a>.</p>
+  </section>
+
+  <!-- Why AI First -->
+  <section class="who-for reveal">
+    <h2>WHY AI-FIRST MATTERS IN 2026</h2>
+    <ul>
+      <li>Businesses built around AI-native products and processes have a structural cost advantage over those retrofitting AI onto legacy operations.</li>
+      <li>Search has changed. AI Overviews, answer engines, and zero-click results mean the old SEO playbook is no longer enough — and most B2B companies haven't adapted yet.</li>
+      <li>The automation gap between early adopters and laggards is widening. Teams using AI to handle repetitive work are compounding that advantage every month.</li>
+      <li>The window for building AI as a competitive moat is open now. In three years, it will be table stakes. The businesses that move first are the ones that get to define the standard.</li>
+    </ul>
+  </section>
+
+  <!-- CTA Strip -->
+  <div class="page-cta-strip reveal">
+    <a href="/contact" class="nav-cta">Start a Conversation <span class="arrow">↗</span></a>
+  </div>
 
   <!-- Footer -->
   <footer class="site-footer">
@@ -147,7 +168,7 @@
       <div class="footer-col">
         <p class="footer-col-title">Connect</p>
         <ul class="footer-links">
-          <li><a href="/#contact">Contact</a></li>
+          <li><a href="/contact">Contact</a></li>
           <li><a href="https://www.linkedin.com/company/growthmode-agency" target="_blank" rel="noopener">LinkedIn</a></li>
         </ul>
       </div>

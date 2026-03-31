@@ -1,0 +1,50 @@
+# Growth Mode
+
+> AI Product Studio for B2B companies that want to build, automate, and grow.
+
+Growth Mode is an AI product studio based in Oxfordshire, UK. Founded by Baz Furby — a commercial operator with 15+ years in SaaS, partnerships, and growth — we design, build, and deploy AI-native products, automation systems, and AI SEO infrastructure for B2B companies across the UK and internationally.
+
+## What We Do
+
+- **SaaS & AI Development** — End-to-end design, development and deployment of AI-native products. From concept to market-ready SaaS, including GTM strategy built in from day one. https://www.growthmode.agency/services/saas-ai-development
+- **AI SEO** — AI-first SEO strategies optimised for how search actually works today: structured data entity graphs, server-side rendering, llms.txt, AI crawler accessibility, and always-on automated optimisation. https://www.growthmode.agency/services/ai-seo
+- **AI Automation & Training** — Audit where AI creates the most leverage, build the automation to capture it, and train your team to run it. From outreach and lead scoring to ops and content. https://www.growthmode.agency/services/ai-automation-training
+- **Fractional AI Consultancy** — Senior AI expertise embedded in your business. Baz Furby works directly with a small number of founders and leadership teams as a fractional AI consultant. https://www.growthmode.agency/services/fractional-ai-consultancy
+
+## Who We Work With
+
+B2B founders and leadership teams in:
+- Martech (CRM, analytics, personalisation, content AI)
+- Adtech (DSP/SSP, creative AI, measurement)
+- Fintech (payments, RegTech, risk AI, lending)
+
+## Verticals
+
+- Martech: marketing intelligence, personalisation engines, attribution platforms, AI-driven content
+- Adtech: programmatic infrastructure, bid optimisation, creative automation, cross-channel measurement
+- Fintech: compliance automation, risk scoring, payments infrastructure, AI-powered financial products
+
+## Research & Thinking
+
+- The Inevitable Destination: Where AI, Robots, and Deflation Take Us — https://www.growthmode.agency/research/the-inevitable-destination
+- SaaS Is Dead. Long Live Agents. — https://www.growthmode.agency/research/saas-is-dead
+
+## About the Founder
+
+Baz Furby is a founder and senior commercial operator with 15 years of SaaS, partnerships, and growth experience. He builds AI products, advises growth-stage businesses, and works hands-on with leadership teams to embed AI into their operations.
+
+LinkedIn: https://www.linkedin.com/in/bazfurby/
+
+## Contact
+
+Website: https://www.growthmode.agency
+Contact: https://www.growthmode.agency/contact
+Email: hello@growthmode.agency
+Location: Oxfordshire, UK (working across the UK and internationally)
+LinkedIn: https://www.linkedin.com/company/growthmode-agency
+
+## AI Crawler Access
+
+Growth Mode welcomes indexing by AI search agents. All content is server-side rendered and accessible in the initial HTML response. We support responsible AI indexing and citation.
+
+Allowed: GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Amazonbot
