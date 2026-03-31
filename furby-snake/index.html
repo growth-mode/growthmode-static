@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Furby Snake.io</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #0a0a2e;
+  font-family: 'Courier New', monospace;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#game-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  padding: 8px;
+}
+
+#game-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+}
+
+#dpad-area {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0 16px;
+}
+
+#title {
+  color: #b366ff;
+  font-size: clamp(18px, 5vw, 32px);
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 0 10px #b366ff, 0 0 20px #7b2fff;
+  margin-bottom: 4px;
+  letter-spacing: 2px;
+}
+
+#score-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  color: #66ffcc;
+  font-size: clamp(12px, 3vw, 18px);
+  margin-bottom: 4px;
+  text-shadow: 0 0 6px #66ffcc;
+}
+
+#game-canvas {
+  border: 2px solid #b366ff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(179, 102, 255, 0.4), inset 0 0 30px rgba(10, 10, 46, 0.8);
+  background: #0d0d35;
+  max-width: 500px;
+  max-height: 500px;
+}
+
+#controls {
+  display: block;
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.ctrl-btn {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: rgba(179, 102, 255, 0.15);
+  border: 2px solid rgba(179, 102, 255, 0.5);
+  border-radius: 14px;
+  color: #b366ff;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ctrl-btn:active {
+  background: rgba(179, 102, 255, 0.45);
+  border-color: #b366ff;
+  box-shadow: 0 0 12px rgba(179, 102, 255, 0.5);
+}
+#btn-up    { top: 0;    left: 60px; }
+#btn-down  { bottom: 0; left: 60px; }
+#btn-left  { top: 60px; left: 0; }
+#btn-right { top: 60px; right: 0; }
+
+#overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10, 10, 46, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+#overlay h1 {
+  color: #b366ff;
+  font-size: clamp(28px, 8vw, 52px);
+  text-shadow: 0 0 15px #b366ff, 0 0 30px #7b2fff;
+  margin-bottom: 8px;
+}
+
+#overlay .subtitle {
+  color: #66ffcc;
+  font-size: clamp(11px, 3vw, 16px);
+  margin-bottom: 20px;
+  text-shadow: 0 0 6px #66ffcc;
+}
+
+#overlay .final-score {
+  color: #ff66b2;
+  font-size: clamp(16px, 4vw, 24px);
+  margin-bottom: 16px;
+}
+
+#play-btn {
+  background: linear-gradient(135deg, #b366ff, #7b2fff);
+  color: #fff;
+  border: none;
+  padding: 14px 40px;
+  font-size: clamp(16px, 4vw, 22px);
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(179, 102, 255, 0.5);
+  letter-spacing: 2px;
+}
+#play-btn:active {
+  transform: scale(0.95);
+}
+
+#furby-preview {
+  width: clamp(80px, 25vw, 140px);
+  height: clamp(80px, 25vw, 140px);
+  margin-bottom: 12px;
+}
+
+</style>
+</head>
+<body>
+
+<div id="game-wrapper">
+  <div id="game-area">
+    <div id="title">FURBY SNAKE.IO</div>
+    <div id="score-bar">
+      <span>SCORE: <span id="score">0</span></span>
+      <span>HI: <span id="hiscore">0</span></span>
+    </div>
+    <canvas id="game-canvas"></canvas>
+  </div>
+  <div id="dpad-area">
+    <div id="controls">
+      <button class="ctrl-btn" id="btn-up">&#9650;</button>
+      <button class="ctrl-btn" id="btn-left">&#9664;</button>
+      <button class="ctrl-btn" id="btn-right">&#9654;</button>
+      <button class="ctrl-btn" id="btn-down">&#9660;</button>
+    </div>
+  </div>
+</div>
+
+<div id="overlay">
+  <canvas id="furby-preview"></canvas>
+  <h1>FURBY SNAKE.IO</h1>
+  <div class="subtitle">eat the sparkles, grow the furby</div>
+  <div class="final-score" id="final-score" style="display:none"></div>
+  <button id="play-btn">PLAY</button>
+</div>
+
+<script>
+// ─── Furby Head Drawing ───
+function drawFurbyHead(ctx, x, y, size, direction) {
+  ctx.save();
+  ctx.translate(x + size / 2, y + size / 2);
+
+  // Rotate based on direction
+  const angles = { right: 0, down: Math.PI / 2, left: Math.PI, up: -Math.PI / 2 };
+  ctx.rotate(angles[direction] || 0);
+
+  const r = size / 2;
+
+  // Fur body (purple fluffy circle)
+  const furGrad = ctx.createRadialGradient(0, 0, r * 0.3, 0, 0, r);
+  furGrad.addColorStop(0, '#c77dff');
+  furGrad.addColorStop(0.6, '#9b5de5');
+  furGrad.addColorStop(1, '#7b2d8e');
+  ctx.fillStyle = furGrad;
+  ctx.beginPath();
+  ctx.arc(0, 0, r * 0.85, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Fur texture - little spikes around edge
+  for (let i = 0; i < 16; i++) {
+    const angle = (i / 16) * Math.PI * 2;
+    const sx = Math.cos(angle) * r * 0.7;
+    const sy = Math.sin(angle) * r * 0.7;
+    const ex = Math.cos(angle) * r * 0.95;
+    const ey = Math.sin(angle) * r * 0.95;
+    ctx.strokeStyle = i % 2 === 0 ? '#d4a0ff' : '#6b2fa0';
+    ctx.lineWidth = size * 0.04;
+    ctx.beginPath();
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(ex, ey);
+    ctx.stroke();
+  }
+
+  // Tuft on top (pointing forward = right in unrotated space)
+  ctx.fillStyle = '#a8d8ff';
+  ctx.beginPath();
+  ctx.moveTo(r * 0.1, -r * 0.3);
+  ctx.lineTo(r * 0.55, -r * 0.85);
+  ctx.lineTo(r * 0.0, -r * 0.5);
+  ctx.lineTo(-r * 0.15, -r * 0.8);
+  ctx.lineTo(-r * 0.1, -r * 0.3);
+  ctx.closePath();
+  ctx.fill();
+
+  // Ears - mint green
+  // Left ear
+  ctx.fillStyle = '#66ffcc';
+  ctx.beginPath();
+  ctx.ellipse(-r * 0.6, -r * 0.45, r * 0.32, r * 0.2, -0.5, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = '#33cc99';
+  ctx.lineWidth = size * 0.03;
+  ctx.stroke();
+  // Ear inner lines
+  ctx.strokeStyle = '#99ffdd';
+  ctx.lineWidth = size * 0.015;
+  for (let i = 0; i < 3; i++) {
+    ctx.beginPath();
+    ctx.ellipse(-r * 0.6, -r * 0.45, r * (0.12 + i * 0.06), r * (0.08 + i * 0.04), -0.5, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  // Right ear
+  ctx.fillStyle = '#66ffcc';
+  ctx.beginPath();
+  ctx.ellipse(r * 0.6, -r * 0.45, r * 0.32, r * 0.2, 0.5, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = '#33cc99';
+  ctx.lineWidth = size * 0.03;
+  ctx.stroke();
+  ctx.strokeStyle = '#99ffdd';
+  ctx.lineWidth = size * 0.015;
+  for (let i = 0; i < 3; i++) {
+    ctx.beginPath();
+    ctx.ellipse(r * 0.6, -r * 0.45, r * (0.12 + i * 0.06), r * (0.08 + i * 0.04), 0.5, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  // Eyes - big and shiny
+  const eyeR = r * 0.22;
+  // Left eye
+  ctx.fillStyle = '#1a0033';
+  ctx.beginPath();
+  ctx.arc(-r * 0.25, r * 0.0, eyeR, 0, Math.PI * 2);
+  ctx.fill();
+  // Iris
+  ctx.fillStyle = '#9b5de5';
+  ctx.beginPath();
+  ctx.arc(-r * 0.25, r * 0.0, eyeR * 0.7, 0, Math.PI * 2);
+  ctx.fill();
+  // Pupil
+  ctx.fillStyle = '#000';
+  ctx.beginPath();
+  ctx.arc(-r * 0.25, r * 0.0, eyeR * 0.35, 0, Math.PI * 2);
+  ctx.fill();
+  // Shine
+  ctx.fillStyle = '#fff';
+  ctx.beginPath();
+  ctx.arc(-r * 0.3, -r * 0.06, eyeR * 0.18, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Right eye
+  ctx.fillStyle = '#1a0033';
+  ctx.beginPath();
+  ctx.arc(r * 0.25, r * 0.0, eyeR, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#9b5de5';
+  ctx.beginPath();
+  ctx.arc(r * 0.25, r * 0.0, eyeR * 0.7, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#000';
+  ctx.beginPath();
+  ctx.arc(r * 0.25, r * 0.0, eyeR * 0.35, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.beginPath();
+  ctx.arc(r * 0.2, -r * 0.06, eyeR * 0.18, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Heart gem between eyes
+  ctx.fillStyle = '#aaddff';
+  ctx.shadowColor = '#aaddff';
+  ctx.shadowBlur = size * 0.15;
+  const hx = 0, hy = -r * 0.2, hs = r * 0.1;
+  ctx.beginPath();
+  ctx.moveTo(hx, hy + hs);
+  ctx.bezierCurveTo(hx - hs, hy, hx - hs, hy - hs * 0.6, hx, hy - hs * 0.2);
+  ctx.bezierCurveTo(hx + hs, hy - hs * 0.6, hx + hs, hy, hx, hy + hs);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // Beak / mouth
+  ctx.fillStyle = '#ffaa33';
+  ctx.beginPath();
+  ctx.moveTo(-r * 0.1, r * 0.22);
+  ctx.lineTo(0, r * 0.38);
+  ctx.lineTo(r * 0.1, r * 0.22);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawFurbyPreview(canvas) {
+  const s = Math.min(canvas.parentElement.clientWidth * 0.3, 140);
+  canvas.width = s;
+  canvas.height = s;
+  const ctx = canvas.getContext('2d');
+  drawFurbyHead(ctx, 0, 0, s, 'right');
+}
+
+// ─── Game Logic ───
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+const scoreEl = document.getElementById('score');
+const hiScoreEl = document.getElementById('hiscore');
+const overlay = document.getElementById('overlay');
+const playBtn = document.getElementById('play-btn');
+const finalScoreEl = document.getElementById('final-score');
+
+const GRID = 20;
+let cols, rows, cellSize;
+let snake, dir, nextDir, food, score, hiScore, gameLoop, speed, alive;
+let sparkleFrame = 0;
+
+hiScore = parseInt(localStorage.getItem('furbySnakeHi') || '0');
+hiScoreEl.textContent = hiScore;
+
+function sizeCanvas() {
+  const wrapper = document.getElementById('game-wrapper');
+  const dpad = document.getElementById('dpad-area');
+  const titleH = document.getElementById('title').offsetHeight;
+  const scoreH = document.getElementById('score-bar').offsetHeight;
+  const dpadH = dpad.offsetHeight || 210;
+  const maxW = Math.min(wrapper.clientWidth - 16, 500);
+  const maxH = Math.min(wrapper.clientHeight - titleH - scoreH - dpadH - 24, 500);
+  const s = Math.min(maxW, maxH);
+  canvas.width = s;
+  canvas.height = s;
+  cellSize = s / GRID;
+  cols = GRID;
+  rows = GRID;
+}
+
+function init() {
+  sizeCanvas();
+  const mid = Math.floor(GRID / 2);
+  snake = [
+    { x: mid, y: mid },
+    { x: mid - 1, y: mid },
+    { x: mid - 2, y: mid },
+  ];
+  dir = 'right';
+  nextDir = 'right';
+  score = 0;
+  speed = 140;
+  alive = true;
+  scoreEl.textContent = 0;
+  placeFood();
+}
+
+function placeFood() {
+  let pos;
+  do {
+    pos = { x: Math.floor(Math.random() * cols), y: Math.floor(Math.random() * rows) };
+  } while (snake.some(s => s.x === pos.x && s.y === pos.y));
+  food = pos;
+}
+
+function update() {
+  if (!alive) return;
+  dir = nextDir;
+  const head = { ...snake[0] };
+  if (dir === 'right') head.x++;
+  else if (dir === 'left') head.x--;
+  else if (dir === 'up') head.y--;
+  else if (dir === 'down') head.y++;
+
+  // Wall collision
+  if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows) {
+    gameOver();
+    return;
+  }
+  // Self collision
+  if (snake.some(s => s.x === head.x && s.y === head.y)) {
+    gameOver();
+    return;
+  }
+
+  snake.unshift(head);
+
+  if (head.x === food.x && head.y === food.y) {
+    score++;
+    scoreEl.textContent = score;
+    if (speed > 60) speed -= 3;
+    placeFood();
+    clearInterval(gameLoop);
+    gameLoop = setInterval(tick, speed);
+  } else {
+    snake.pop();
+  }
+}
+
+function drawSparkle(cx, cy, size) {
+  sparkleFrame++;
+  const t = sparkleFrame * 0.08;
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(t);
+
+  // Star sparkle
+  ctx.fillStyle = '#ffee66';
+  ctx.shadowColor = '#ffee66';
+  ctx.shadowBlur = 8;
+  for (let i = 0; i < 4; i++) {
+    ctx.save();
+    ctx.rotate((i / 4) * Math.PI * 2);
+    ctx.beginPath();
+    ctx.moveTo(0, -size * 0.5);
+    ctx.lineTo(size * 0.1, -size * 0.12);
+    ctx.lineTo(0, 0);
+    ctx.lineTo(-size * 0.1, -size * 0.12);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+  ctx.shadowBlur = 0;
+  ctx.restore();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Grid lines (subtle)
+  ctx.strokeStyle = 'rgba(179, 102, 255, 0.06)';
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i <= cols; i++) {
+    ctx.beginPath();
+    ctx.moveTo(i * cellSize, 0);
+    ctx.lineTo(i * cellSize, canvas.height);
+    ctx.stroke();
+  }
+  for (let j = 0; j <= rows; j++) {
+    ctx.beginPath();
+    ctx.moveTo(0, j * cellSize);
+    ctx.lineTo(canvas.width, j * cellSize);
+    ctx.stroke();
+  }
+
+  // Food sparkle
+  drawSparkle(
+    food.x * cellSize + cellSize / 2,
+    food.y * cellSize + cellSize / 2,
+    cellSize * 0.8
+  );
+
+  // Snake body
+  for (let i = snake.length - 1; i >= 1; i--) {
+    const seg = snake[i];
+    const t = i / snake.length;
+    const purple = Math.round(102 + t * 80);
+    ctx.fillStyle = `rgb(${Math.round(150 - t * 50)}, ${Math.round(50 + t * 30)}, ${purple + 60})`;
+    ctx.shadowColor = '#b366ff';
+    ctx.shadowBlur = 4;
+    const pad = cellSize * 0.08;
+    ctx.beginPath();
+    ctx.roundRect(
+      seg.x * cellSize + pad,
+      seg.y * cellSize + pad,
+      cellSize - pad * 2,
+      cellSize - pad * 2,
+      cellSize * 0.2
+    );
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+
+  // Snake head (Furby!)
+  const head = snake[0];
+  drawFurbyHead(ctx, head.x * cellSize, head.y * cellSize, cellSize, dir);
+}
+
+function tick() {
+  update();
+  draw();
+}
+
+function gameOver() {
+  alive = false;
+  clearInterval(gameLoop);
+  if (score > hiScore) {
+    hiScore = score;
+    localStorage.setItem('furbySnakeHi', hiScore);
+    hiScoreEl.textContent = hiScore;
+  }
+  finalScoreEl.textContent = `SCORE: ${score}`;
+  finalScoreEl.style.display = 'block';
+  overlay.style.display = 'flex';
+  drawFurbyPreview(document.getElementById('furby-preview'));
+}
+
+function startGame() {
+  overlay.style.display = 'none';
+  init();
+  gameLoop = setInterval(tick, speed);
+  draw();
+}
+
+// ─── Input ───
+const opposites = { up: 'down', down: 'up', left: 'right', right: 'left' };
+
+function setDir(d) {
+  if (d !== opposites[dir]) nextDir = d;
+}
+
+document.addEventListener('keydown', e => {
+  const map = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right',
+                 w: 'up', s: 'down', a: 'left', d: 'right' };
+  if (map[e.key]) {
+    e.preventDefault();
+    setDir(map[e.key]);
+  }
+});
+
+// D-pad buttons
+document.getElementById('btn-up').addEventListener('touchstart', e => { e.preventDefault(); setDir('up'); });
+document.getElementById('btn-down').addEventListener('touchstart', e => { e.preventDefault(); setDir('down'); });
+document.getElementById('btn-left').addEventListener('touchstart', e => { e.preventDefault(); setDir('left'); });
+document.getElementById('btn-right').addEventListener('touchstart', e => { e.preventDefault(); setDir('right'); });
+
+// Swipe
+let touchStartX, touchStartY;
+canvas.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+});
+canvas.addEventListener('touchend', e => {
+  if (!touchStartX) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
+  if (Math.abs(dx) > Math.abs(dy)) {
+    setDir(dx > 0 ? 'right' : 'left');
+  } else {
+    setDir(dy > 0 ? 'down' : 'up');
+  }
+});
+
+playBtn.addEventListener('click', startGame);
+
+// Resize handling
+window.addEventListener('resize', () => {
+  sizeCanvas();
+  if (alive) draw();
+});
+
+// Draw preview on load
+drawFurbyPreview(document.getElementById('furby-preview'));
+</script>
+</body>
+</html>
