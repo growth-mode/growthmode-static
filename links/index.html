@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Baz Furby — Projects</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0f0f0f;
+      --yellow: #e8f227;
+      --grey: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e0e0e0;
+      --muted: #666;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 24px 20px max(24px, env(safe-area-inset-bottom));
+    }
+
+    .container {
+      width: 100%;
+      max-width: 390px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .header-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.06em;
+      color: var(--yellow);
+      line-height: 1;
+    }
+
+    .header-role {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Link cards */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: var(--grey);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: border-color 0.15s, background 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .link-card:active,
+    .link-card:hover {
+      border-color: var(--yellow);
+      background: #222;
+    }
+
+    .link-card-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .link-card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.05em;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .link-card-desc {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    .link-card-arrow {
+      font-size: 0.85rem;
+      color: var(--yellow);
+      margin-left: 12px;
+      flex-shrink: 0;
+      opacity: 0.7;
+      transition: opacity 0.15s;
+    }
+
+    .link-card:hover .link-card-arrow,
+    .link-card:active .link-card-arrow {
+      opacity: 1;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer a:hover { color: var(--yellow); }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="header">
+      <p class="header-name">BAZ FURBY</p>
+      <p class="header-role">Founder &middot; Growth Mode &middot; AI Product Studio</p>
+    </div>
+
+    <div class="links">
+
+      <a href="https://www.growwithghost.io" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-card-text">
+          <p class="link-card-name">GROW WITH GHOST</p>
+          <p class="link-card-desc">GTM &amp; LinkedIn automation for founders and revenue teams</p>
+        </div>
+        <span class="link-card-arrow">↗</span>
+      </a>
+
+      <a href="https://www.pluggin.ai" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-card-text">
+          <p class="link-card-name">PLUGGIN</p>
+          <p class="link-card-desc">Agentic business operating system — run your business on autopilot</p>
+        </div>
+        <span class="link-card-arrow">↗</span>
+      </a>
+
+      <a href="https://www.surfaceable.io" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-card-text">
+          <p class="link-card-name">SURFACEABLE</p>
+          <p class="link-card-desc">SEO &amp; AI visibility — get found in search and mentioned by AI</p>
+        </div>
+        <span class="link-card-arrow">↗</span>
+      </a>
+
+      <a href="https://www.subredify.com" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-card-text">
+          <p class="link-card-name">SUBREDIFY</p>
+          <p class="link-card-desc">Reddit strategy tool — find your audience, own your niche</p>
+        </div>
+        <span class="link-card-arrow">↗</span>
+      </a>
+
+      <a href="https://www.founderengineroom.com" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-card-text">
+          <p class="link-card-name">FOUNDERS ENGINE ROOM</p>
+          <p class="link-card-desc">The founders hub — LinkedIn for startups, built in public</p>
+        </div>
+        <span class="link-card-arrow">↗</span>
+      </a>
+
+      <a href="https://www.growthmode.agency" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-card-text">
+          <p class="link-card-name">GROWTH MODE</p>
+          <p class="link-card-desc">AI product studio — we build products, automate workflows &amp; engineer growth</p>
+        </div>
+        <span class="link-card-arrow">↗</span>
+      </a>
+
+    </div>
+
+    <div class="footer">
+      <a href="https://www.linkedin.com/in/bazfurby/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
